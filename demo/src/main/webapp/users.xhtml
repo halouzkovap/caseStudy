@@ -30,19 +30,19 @@
                     </div>
                 </f:facet>
 
-                <p:column headerText="Id" field="id" sortBy="#{user.id}" filterable="false">
+                <p:column headerText="Id" field="id" sortBy="#{user.id}" filterBy="#{user.id}">
                     <h:outputText value="#{user.id}"/>
                 </p:column>
 
-                <p:column headerText="Name" field="name" sortBy="#{user.name}" filterable="false">
+                <p:column headerText="Name" field="name" sortBy="#{user.name}" filterBy="#{user.name}">
                     <h:outputText value="#{user.name}"/>
                 </p:column>
 
-                <p:column headerText="Surname" field="surname" sortBy="#{user.surname}" filterable="false">
+                <p:column headerText="Surname" field="surname" sortBy="#{user.surname}" filterBy="#{user.surname}">
                     <h:outputText value="#{user.surname}"/>
                 </p:column>
 
-                <p:column headerText="Status" field="status" sortBy="#{user.status}" filterable="false">
+                <p:column headerText="Status" field="status" sortBy="#{user.status}" filterBy="#{user.status}">
                     <h:outputText value="#{user.status}"/>
                 </p:column>
 

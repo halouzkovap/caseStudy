@@ -9,15 +9,11 @@ public interface UserService {
 
     List<User> findAllUser();
 
-    Optional<User> findUser(Integer id);
-
-    void changeStatus(User id);
+    User findUser(Integer id);
 
     User editUser(User user);
 
     void deleteUser(User user);
 
-
-    void createUser(User user);
 
 }

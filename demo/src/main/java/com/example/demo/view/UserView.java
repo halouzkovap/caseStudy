@@ -65,7 +65,7 @@ public class UserView implements Serializable {
 
 
     public void deleteUser() {
-        User u = userService.findUser(selectedUser.getId()).get();
+        User u = userService.findUser(selectedUser.getId());
         userService.deleteUser(u);
         users = userService.findAllUser();
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("User remove"));
@@ -74,7 +74,7 @@ public class UserView implements Serializable {
     }
 
     public void change() {
-        User u = userService.findUser(selectedUser.getId()).get();
+        User u = userService.findUser(selectedUser.getId());
         UserStatus userStatus = this.selectedUser.getStatus();
         if (userStatus.name() == "ACTIVE") {
             u.setStatus(UserStatus.DEACTIVE);
@@ -90,7 +90,7 @@ public class UserView implements Serializable {
 
 
     public void saveUser() {
-        User u = userService.findUser(selectedUser.getId()).get();
+        User u = userService.findUser(selectedUser.getId());
         u.setName(selectedUser.getName());
         u.setSurname(selectedUser.getSurname());
         u.setEmail(selectedUser.getEmail());

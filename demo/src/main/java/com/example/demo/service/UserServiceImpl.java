@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -43,17 +44,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findUser(Integer id) {
-        try {
-            return userRepository.findById(id);
-        } catch (NullPointerException e) {
-            throw new NullPointerException("User doesnt exist");
-        }
-    }
-
-    @Override
-    public void changeStatus(User user) {
-        userRepository.save(user);
+    public User findUser(Integer id) {
+        Optional <User> user = userRepository.findById(id);
+        return user.orElseThrow();
     }
 
     @Override
@@ -64,11 +57,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(User user) {
         userRepository.delete(user);
-    }
-
-    @Override
-    public void createUser(User user) {
-        userRepository.save(user);
     }
 
      LocalDate getDate() {
