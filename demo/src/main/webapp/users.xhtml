@@ -1,0 +1,146 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+</h:head>
+<h:body>
+    <h:form id="form">
+        <div>
+            <p:growl id="messages" showDetail="true"/>
+
+            <p:dataTable id="dt-users" widgetVar="dtUsers " var="user" value="#{userView.users}"
+                         filteredValue="#{userView.filteredUsers}"
+                         globalFilterFunction="#{userView.globalFilterFunction}"
+                         reflow="true" styleClass="products-table"
+                         rowKey="#{user.id}" paginator="true"
+                         rows="10" rowSelectMode="add" paginatorPosition="bottom"
+                        >
+                <f:facet name="header">
+                    <div class="products-table-header">
+                        <span style="font-weight: bold">USERS</span>
+                        <div class="p-d-flex p-jc-end">
+                            <p:inputText id="global-filter" class="global-search-input" onkeyup="PF('dtUsers').filter()" style="width:300px"
+                                         placeholder="Search" />
+                        </div>
+                    </div>
+                </f:facet>
+
+                <p:column headerText="Id" field="id" sortBy="#{user.id}" filterable="false">
+                    <h:outputText value="#{user.id}"/>
+                </p:column>
+
+                <p:column headerText="Name" field="name" sortBy="#{user.name}" filterable="false">
+                    <h:outputText value="#{user.name}"/>
+                </p:column>
+
+                <p:column headerText="Surname" field="surname" sortBy="#{user.surname}" filterable="false">
+                    <h:outputText value="#{user.surname}"/>
+                </p:column>
+
+                <p:column headerText="Status" field="status" sortBy="#{user.status}" filterable="false">
+                    <h:outputText value="#{user.status}"/>
+                </p:column>
+
+                <p:column headerText="Email" field="email" filterable="false">
+                    <h:outputText value="#{user.email}"/>
+                </p:column>
+
+                <p:column headerText="Phone" field="phone" filterable="false">
+                    <h:outputText value="#{user.phone}"/>
+                </p:column>
+
+                <p:column  headerText="Date of creation" field="creationdate" filterMatchMode="range">
+                    <f:facet name="filter">
+                        <p:datePicker selectionMode="range" onchange="PF('dtUsers').filter()" />
+                    </f:facet>
+                    <h:outputText value="#{user.creationdate}"/>
+                </p:column>
+
+                <p:column>
+                    <p:commandButton icon="pi pi-pencil" update=":form:manage-user-content"
+                                     oncomplete="PF('manageUserDialog').show()"
+                                     styleClass="edit-button rounded-button ui-button-success" process="@this">
+                        <f:setPropertyActionListener value="#{user}" target="#{userView.selectedUser}"/>
+                        <p:resetInput target=":form:manage-user-content"/>
+                    </p:commandButton>
+
+                    <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this"
+                                     oncomplete="PF('deleteUserDialog').show()">
+                        <f:setPropertyActionListener value="#{user}" target="#{userView.selectedUser}"/>
+                    </p:commandButton>
+
+                    <p:commandButton class="ui-button-warning rounded-button" value="Change Status"
+                                     styleClass="rounded-button ui-button-warning"
+                                     process="@this"
+                                     oncomplete="PF('changeStatusUserDialog').show()">
+                        <f:setPropertyActionListener value="#{user}" target="#{userView.selectedUser}"/>
+                    </p:commandButton>
+                </p:column>
+
+            </p:dataTable>
+
+
+            <p:dialog header="User Details" showEffect="fade" modal="true"
+                      widgetVar="manageUserDialog" responsive="true">
+                <p:outputPanel id="manage-user-content" class="ui-fluid">
+                    <p:outputPanel rendered="#{not empty userView.selectedUser}">
+                        <div class="p-field">
+                            <p:outputLabel for="name">Name</p:outputLabel>
+                            <p:inputText id="name" value="#{userView.selectedUser.name}" required="true"/>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="surname">Surname</p:outputLabel>
+                            <p:inputText id="surname" value="#{userView.selectedUser.surname}" required="true"/>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="email">Email</p:outputLabel>
+                            <p:inputText id="email" value="#{userView.selectedUser.email}" required="true"/>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="email">Phone</p:outputLabel>
+                            <p:inputText id="phone" value="#{userView.selectedUser.phone}" required="true"/>
+                        </div>
+                    </p:outputPanel>
+                </p:outputPanel>
+
+                <f:facet name="footer">
+                    <p:commandButton value="Save" icon="pi pi-check" actionListener="#{userView.saveUser}"
+                                     update="manage-user-content" process="manage-user-content @this"/>
+                    <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageUserDialog').hide()"
+                                     class="ui-button-secondary"/>
+                </f:facet>
+            </p:dialog>
+
+            <p:confirmDialog widgetVar="deleteUserDialog" showEffect="fade" width="300"
+                             message="Delete the user?" header="Confirm" severity="warn">
+                <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{userView.deleteUser()}"
+                                 process="@this" oncomplete="PF('deleteUserDialog').hide()"/>
+                <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                 onclick="PF('deleteUserDialog').hide()"/>
+            </p:confirmDialog>
+
+
+            <p:confirmDialog widgetVar="changeStatusUserDialog" showEffect="fade" width="300"
+                             message="Change status of the user?" header="Confirm" severity="warn">
+                <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{userView.change()}"
+                                 process="@this" oncomplete="PF('changeStatusUserDialog').hide()"/>
+                <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                 onclick="PF('changeStatusUserDialog').hide()"/>
+            </p:confirmDialog>
+
+            <p:confirmDialog global="true" showEffect="fade" width="300">
+                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-secondary"
+                                 icon="pi pi-times"/>
+            </p:confirmDialog>
+
+
+        </div>
+    </h:form>
+</h:body>
+</html>
