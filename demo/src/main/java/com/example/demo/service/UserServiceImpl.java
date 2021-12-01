@@ -22,20 +22,20 @@ public class UserServiceImpl implements UserService {
 
     @PostConstruct
     void init() {
-        userRepository.save(new User("Petra", "Hal", UserStatus.ACTIVE, "email@com.cz", 77777, getDate()));
-        userRepository.save(new User("Jana", "Hal", UserStatus.ACTIVE, "email@com.cz", 77777, getDate()));
-        userRepository.save(new User("Honza", "Hal", UserStatus.ACTIVE, "email@com.cz", 77777,getDate()));
-        userRepository.save(new User("Petra", "Hal", UserStatus.ACTIVE, "email@com.cz", 77777,getDate()));
-        userRepository.save(new User("Karel", "Hal", UserStatus.ACTIVE, "email@com.cz", 77777,getDate()));
-        userRepository.save(new User("Petra", "Hal", UserStatus.ACTIVE, "email@com.cz", 77777,getDate()));
-        userRepository.save(new User("Petra", "Hal", UserStatus.ACTIVE, "email@com.cz", 77777,getDate()));
-        userRepository.save(new User("Klára", "Hal", UserStatus.ACTIVE, "email@com.cz", 77777,getDate()));
-        userRepository.save(new User("Petra", "Hal", UserStatus.ACTIVE, "email@com.cz", 77777,getDate()));
-        userRepository.save(new User("Luboš", "Hal", UserStatus.ACTIVE, "email@com.cz", 77777,getDate()));
-        userRepository.save(new User("Petra", "Hal", UserStatus.ACTIVE, "email@com.cz", 77777,getDate()));
-        userRepository.save(new User("Tomáš", "Hal", UserStatus.ACTIVE, "email@com.cz", 77777,getDate()));
-        userRepository.save(new User("Petra", "Hal", UserStatus.ACTIVE, "email@com.cz", 77777,getDate()));
-        userRepository.save(new User("Petra", "Hal", UserStatus.ACTIVE, "email@com.cz", 77777,getDate()));
+        userRepository.save(new User("Petra", "Jabličková", UserStatus.ACTIVE, "email@com.cz", 77754677, getDate()));
+        userRepository.save(new User("Jana", "Koukalová", UserStatus.ACTIVE, "email@com.cz", 778879777, getDate()));
+        userRepository.save(new User("Luděk", "Král", UserStatus.ACTIVE, "email@com.cz", 77777,getDate()));
+        userRepository.save(new User("Petr", "Fiala", UserStatus.ACTIVE, "email@com.cz", 77777777,getDate()));
+        userRepository.save(new User("Karel", "Zahrdník", UserStatus.ACTIVE, "email@com.cz", 77777,getDate()));
+        userRepository.save(new User("Katka", "Hal", UserStatus.ACTIVE, "email@com.cz", 77654777,getDate()));
+        userRepository.save(new User("Maria", "Zeleninová", UserStatus.DEACTIVE, "email@com.cz", 77777,getDate()));
+        userRepository.save(new User("Klára", "Staňková", UserStatus.DEACTIVE, "email@com.cz", 77744477,getDate()));
+        userRepository.save(new User("Alena", "Zelená", UserStatus.DEACTIVE, "email@com.cz", 33377777,getDate()));
+        userRepository.save(new User("Luboš", "Halda", UserStatus.ACTIVE, "email@com.cz", 777754657,getDate()));
+        userRepository.save(new User("František", "Ficek", UserStatus.ACTIVE, "email@com.cz", 55577777,getDate()));
+        userRepository.save(new User("Tomáš", "Sehnal", UserStatus.ACTIVE, "email@com.cz", 71117777,getDate()));
+        userRepository.save(new User("Hana", "Králová", UserStatus.ACTIVE, "email@com.cz", 88877777,getDate()));
+        userRepository.save(new User("Jan", "Nesehnal", UserStatus.ACTIVE, "email@com.cz", 7788777,getDate()));
     }
 
     @Override

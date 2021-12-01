@@ -8,7 +8,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.primefaces.PrimeFaces;
 import org.primefaces.model.FilterMeta;
-import org.primefaces.model.MatchMode;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -17,9 +17,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -42,20 +40,18 @@ public class UserView implements Serializable {
     private List<FilterMeta> filterBy;
     private User selectedUser;
 
+    @Autowired
     public UserView(UserService userService) {
         this.userService = userService;
     }
 
+
     @PostConstruct
     public void loadUsers() {
+       filteredUsers=new ArrayList<>();
         users = userService.findAllUser();
-        filteredUsers = userService.findAllUser();
-        filterBy = new ArrayList<>();
-        filterBy.add(FilterMeta.builder()
-                .field("creationdate")
-                .filterValue(new ArrayList<>(Arrays.asList(LocalDate.now().minusDays(28), LocalDate.now().plusDays(28))))
-                .matchMode(MatchMode.RANGE)
-                .build());
+
+
     }
 
 
@@ -103,16 +99,7 @@ public class UserView implements Serializable {
         PrimeFaces.current().ajax().update("form:messages", "form:dt-users");
     }
 
-    public boolean globalFilterFunction(Object value, Object filter, Locale locale) {
-        String filterText = (filter == null) ? null : filter.toString().trim().toLowerCase();
-        if (filterText == null || filterText.equals("")) {
-            return true;
-        }
 
 
-        User user = (User) value;
-        return user.getName().toLowerCase().contains(filterText)
-                || user.getSurname().toLowerCase().contains(filterText)
-               ;
-    }
+
 }

@@ -1,0 +1,15 @@
+
+S
+java:S1117q"8Rename "user" which hides the field declared at line 40.(Ý¢šÝýÿÿÿÿ
+T
+java:S4973O"9Use the "equals" method if value comparison was intended.(Í Ïìÿÿÿÿÿ
+d
+java:S1192I"NDefine a constant instead of duplicating this literal "form:dt-users" 3 times.(Î‰ýœ
+C
+java:S1172j"-Remove this unused method parameter "locale".(»Þà°
+t
+java:S1192H"^Define a constant instead of duplicating this literal "PF('manageUserDialog').hide()" 3 times.(Ôç£Õ
+d
+java:S1192I"NDefine a constant instead of duplicating this literal "form:messages" 3 times.(Î‰ýœ
+H
+java:S1948$"-Make "userService" transient or serializable.(ÇêÞ¢ýÿÿÿÿ
