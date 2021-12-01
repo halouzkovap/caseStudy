@@ -8,7 +8,7 @@
 
 <h:head>
 </h:head>
-<h:body>
+<h:body style="padding: 10px">
     <div class="card">
         <h:form id="form">
             <div>
@@ -51,9 +51,9 @@
                     </p:column>
 
                     <p:column headerText="Date of creation" field="creationdate" sortable="false"
-                              filterBy="#{user.creationdate}" filterMatchMode="range">
+                              filterBy="#{user.creationdate}" filterMatchMode="between">
                         <f:facet name="filter">
-                            <p:datePicker selectionMode="range" />
+                            <p:datePicker selectionMode="range" onchange="PF('dtUsers').filter()"  />
                         </f:facet>
                         <h:outputText value="#{user.creationdate}"/>
                     </p:column>
